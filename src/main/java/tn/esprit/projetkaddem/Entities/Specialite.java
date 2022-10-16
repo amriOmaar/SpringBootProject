@@ -1,4 +1,4 @@
-package tn.esprit.projetkaddem;
+package tn.esprit.projetkaddem.Entities;
 
 public enum Specialite {
 
