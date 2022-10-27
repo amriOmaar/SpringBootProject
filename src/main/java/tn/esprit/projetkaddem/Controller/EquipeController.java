@@ -1,5 +1,6 @@
 package tn.esprit.projetkaddem.Controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.Equipe;
@@ -7,12 +8,13 @@ import tn.esprit.projetkaddem.Service.EquipeService;
 
 import java.util.List;
 
+
+@AllArgsConstructor
 @RestController
 public class EquipeController {
 
 
 
-    @Autowired
     EquipeService equipeService;
 
     //creating a get mapping that retrieves all the Equipes detail from the database
@@ -39,6 +41,17 @@ public class EquipeController {
     public String deleteEquipe (@PathVariable Long idEquipe){
         return equipeService.deleteEquipe(idEquipe);
     }
+
+
+
+
+    @GetMapping("/findByetudiantsIdEtudiant/{idEtudiant}")
+    public List<Equipe> findByEtudiantsIdEtudiant (Long idEtudiant) {
+        return equipeService.findByEtudiantsIdEtudiant(idEtudiant);
+
+    }
+
+
 
 
 }

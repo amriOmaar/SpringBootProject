@@ -1,16 +1,18 @@
 package tn.esprit.projetkaddem.Controller;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.projetkaddem.Entities.Equipe;
 import tn.esprit.projetkaddem.Entities.Etudiant;
 import tn.esprit.projetkaddem.Service.EtudiantService;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class EtudiantController {
 
-    @Autowired
     EtudiantService EtudiantService;
 
     @GetMapping("/etudiants")
@@ -24,14 +26,15 @@ public class EtudiantController {
     }
 
     @GetMapping("/EtudiantByPrenom/{prenom}")
-    public Etudiant getEtudiantByPrenom(@PathVariable String prenom){
-        return EtudiantService.getEtudiantByPnemom(prenom);
+    public Etudiant findEtudiantByPrenom(@PathVariable("prenom") String prenom){
+        return EtudiantService.findEtudiantByPnemom(prenom);
     }
 
     @GetMapping("/EtudiantByNom/{nom}")
-    public Etudiant getEtudiantByNom(@PathVariable String nom){
-        return EtudiantService.getEtudiantByNom(nom);
+    public Etudiant findEtudiantByNom(@PathVariable("nom") String nom){
+        return EtudiantService.findEtudiantByNom(nom);
     }
+
 
 
     @PostMapping("/AddEtudiant")
@@ -51,9 +54,15 @@ public class EtudiantController {
     }
 
     @DeleteMapping("/DeleteEtudiant/{idEtudiant}")
-    public String deleteEtudiant (@PathVariable Long idEtudiant){
+    public String deleteEtudiant (@PathVariable("idEtudiant") Long idEtudiant){
         return EtudiantService.deleteEtudiant(idEtudiant);
     }
+
+
+
+
+
+
 
 
 }

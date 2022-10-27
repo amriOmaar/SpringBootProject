@@ -1,10 +1,14 @@
 package tn.esprit.projetkaddem.Entities;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity(name = "Etudiant")
+@Getter
+@Setter
 public class Etudiant implements Serializable {
 
     @Id
@@ -42,62 +46,6 @@ public class Etudiant implements Serializable {
         this.prenom = prenom;
         this.nom = nom;
         this.option = option;
-    }
-
-    public Long getIdEtudiant() {
-        return idEtudiant;
-    }
-
-    public void setIdEtudiant(Long idEtudiant) {
-        this.idEtudiant = idEtudiant;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Option getOption() {
-        return option;
-    }
-
-    public void setOption(Option option) {
-        this.option = option;
-    }
-
-    public Set<Contrat> getContrats() {
-        return contrats;
-    }
-
-    public void setContrats(Set<Contrat> contrats) {
-        this.contrats = contrats;
-    }
-
-    public Departement getDepartement() {
-        return departement;
-    }
-
-    public void setDepartement(Departement departement) {
-        this.departement = departement;
-    }
-
-    public Set<Equipe> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(Set<Equipe> equipes) {
-        this.equipes = equipes;
     }
 
     @Override

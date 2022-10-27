@@ -1,6 +1,7 @@
 package tn.esprit.projetkaddem.Controller;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.Departement;
@@ -8,10 +9,11 @@ import tn.esprit.projetkaddem.Service.DepartementService;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class DepartementController {
 
-    @Autowired
+
     DepartementService DepartementService;
 
 

@@ -1,6 +1,7 @@
 package tn.esprit.projetkaddem.Service;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.projetkaddem.Entities.Universite;
@@ -8,11 +9,12 @@ import tn.esprit.projetkaddem.Repository.UniversiteRepository;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class UniversiteService {
 
 
-    @Autowired
+
     UniversiteRepository UniversiteRepository;
 
 

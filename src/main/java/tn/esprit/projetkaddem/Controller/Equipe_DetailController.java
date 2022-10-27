@@ -1,17 +1,20 @@
 package tn.esprit.projetkaddem.Controller;
 
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.Equipe_Detail;
 import tn.esprit.projetkaddem.Service.Equipe_DetailService;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 public class Equipe_DetailController {
 
-    @Autowired
+
     Equipe_DetailService Equipe_DetailService;
 
 
@@ -39,6 +42,12 @@ public class Equipe_DetailController {
     public String deleteDetailEquipe (@PathVariable Long idDetailEquipe){
         return Equipe_DetailService.deleteDetailEquipe(idDetailEquipe);
     }
+
+
+    @GetMapping("/findByThematiqueLike/{thematique}")
+    public List<Equipe_Detail> findByThematiqueLike (@PathVariable("thematique") String thematique){
+        return Equipe_DetailService.findByThematiqueLike(thematique);
+    };
 
 
 

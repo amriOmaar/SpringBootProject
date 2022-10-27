@@ -3,10 +3,15 @@ package tn.esprit.projetkaddem.Entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+
+import lombok.Getter;
+import lombok.Setter;
 import tn.esprit.projetkaddem.Entities.*;
 
 
 @Entity(name = "Equipe")
+@Getter
+@Setter
 public class Equipe implements Serializable {
 
     @Id
@@ -32,46 +37,6 @@ public class Equipe implements Serializable {
 
     public Equipe() {
 
-    }
-
-    public Long getIdEquipe() {
-        return idEquipe;
-    }
-
-    public void setIdEquipe(Long idEquipe) {
-        this.idEquipe = idEquipe;
-    }
-
-    public String getNomEquipe() {
-        return nomEquipe;
-    }
-
-    public void setNomEquipe(String nomEquipe) {
-        this.nomEquipe = nomEquipe;
-    }
-
-    public niveau getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(niveau niveau) {
-        this.niveau = niveau;
-    }
-
-    public Equipe_Detail getEquipe_Detail() {
-        return Equipe_Detail;
-    }
-
-    public void setEquipe_Detail(Equipe_Detail equipe_Detail) {
-        Equipe_Detail = equipe_Detail;
-    }
-
-    public Set<Etudiant> getEtudiants() {
-        return etudiants;
-    }
-
-    public void setEtudiants(Set<Etudiant> etudiants) {
-        this.etudiants = etudiants;
     }
 
     @Override

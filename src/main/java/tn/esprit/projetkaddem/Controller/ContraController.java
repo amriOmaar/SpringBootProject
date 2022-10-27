@@ -1,5 +1,6 @@
 package tn.esprit.projetkaddem.Controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.Contrat;
@@ -7,10 +8,12 @@ import tn.esprit.projetkaddem.Service.ContratService;
 
 import java.util.List;
 
+
+@AllArgsConstructor
 @RestController
 public class ContraController {
 
-    @Autowired
+
     ContratService ContratService;
 
 

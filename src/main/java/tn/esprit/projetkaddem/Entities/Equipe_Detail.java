@@ -1,10 +1,15 @@
 package tn.esprit.projetkaddem.Entities;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "DetailEquipe")
+@Getter
+@Setter
 public class Equipe_Detail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,45 +32,4 @@ public class Equipe_Detail implements Serializable {
     public Equipe_Detail() {
     }
 
-    public long getIdDetailEquipe() {
-        return idDetailEquipe;
-    }
-
-    public void setIdDetailEquipe(long idDetailEquipe) {
-        this.idDetailEquipe = idDetailEquipe;
-    }
-
-    public int getSalle() {
-        return salle;
-    }
-
-    public void setSalle(int salle) {
-        this.salle = salle;
-    }
-
-    public String getThematique() {
-        return thematique;
-    }
-
-    public void setThematique(String thematique) {
-        this.thematique = thematique;
-    }
-
-    public tn.esprit.projetkaddem.Entities.Equipe getEquipe() {
-        return Equipe;
-    }
-
-    public void setEquipe(tn.esprit.projetkaddem.Entities.Equipe equipe) {
-        Equipe = equipe;
-    }
-
-    @Override
-    public String toString() {
-        return "Equipe_Detail{" +
-                "idDetailEquipe=" + idDetailEquipe +
-                ", salle=" + salle +
-                ", thematique='" + thematique + '\'' +
-                ", Equipe=" + Equipe +
-                '}';
-    }
 }
