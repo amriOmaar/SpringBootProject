@@ -2,12 +2,10 @@ package tn.esprit.projetkaddem.Controller;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.projetkaddem.Entities.Equipe_Detail;
-import tn.esprit.projetkaddem.Service.Equipe_DetailService;
+import tn.esprit.projetkaddem.Entities.DetailEquipe;
+import tn.esprit.projetkaddem.Service.DetailEquipeService;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,27 +13,27 @@ import java.util.List;
 public class Equipe_DetailController {
 
 
-    Equipe_DetailService Equipe_DetailService;
+    DetailEquipeService Equipe_DetailService;
 
 
 
     @GetMapping("/detailEquipes")
-    private List<Equipe_Detail> getAlldetailEquipes() {
+    private List<DetailEquipe> getAlldetailEquipes() {
         return Equipe_DetailService.getDetailEquipes();
     }
 
 
     @PostMapping("/AddDetailEquipe")
-    public Equipe_Detail addDetailEquipe (@RequestBody Equipe_Detail Equipe_Detail){
-        return Equipe_DetailService.saveDetailEquipe(Equipe_Detail);
+    public DetailEquipe addDetailEquipe (@RequestBody DetailEquipe DetailEquipe){
+        return Equipe_DetailService.saveDetailEquipe(DetailEquipe);
     }
     @PostMapping("/AddDetailEquipes")
-    public List<Equipe_Detail> addDetailEquipes (@RequestBody List<Equipe_Detail> Equipe_Detail){
-        return Equipe_DetailService.saveDetailEquipes(Equipe_Detail);
+    public List<DetailEquipe> addDetailEquipes (@RequestBody List<DetailEquipe> DetailEquipe){
+        return Equipe_DetailService.saveDetailEquipes(DetailEquipe);
     }
     @PutMapping("/UpdateDetailEquipe")
-    public Equipe_Detail updateDetailEquipe (@RequestBody Equipe_Detail Equipe_Detail){
-        return Equipe_DetailService.upadateDetailEquipe(Equipe_Detail);
+    public DetailEquipe updateDetailEquipe (@RequestBody DetailEquipe DetailEquipe){
+        return Equipe_DetailService.upadateDetailEquipe(DetailEquipe);
     }
 
     @DeleteMapping("/DeleteDetailEquipe/{idDetailEquipe}")
@@ -44,10 +42,6 @@ public class Equipe_DetailController {
     }
 
 
-    @GetMapping("/findByThematiqueLike/{thematique}")
-    public List<Equipe_Detail> findByThematiqueLike (@PathVariable("thematique") String thematique){
-        return Equipe_DetailService.findByThematiqueLike(thematique);
-    };
 
 
 

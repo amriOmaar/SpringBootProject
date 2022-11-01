@@ -4,12 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import tn.esprit.projetkaddem.Entities.*;
 
 
 @Entity(name = "Equipe")
+@AllArgsConstructor
 @Getter
 @Setter
 public class Equipe implements Serializable {
@@ -18,35 +20,21 @@ public class Equipe implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipe;
     private String nomEquipe;
+    @Enumerated(EnumType.STRING)
     private niveau niveau;
 
     @OneToOne
-    private Equipe_Detail Equipe_Detail;
+    private DetailEquipe detailEquipe;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "equipes")
+    @JsonIgnore
     private Set<Etudiant> etudiants;
 
 
-    public Equipe(Long idEquipe, String nomEquipe, tn.esprit.projetkaddem.Entities.niveau niveau, tn.esprit.projetkaddem.Entities.Equipe_Detail equipe_Detail, Set<Etudiant> etudiants) {
-        this.idEquipe = idEquipe;
-        this.nomEquipe = nomEquipe;
-        this.niveau = niveau;
-        Equipe_Detail = equipe_Detail;
-        this.etudiants = etudiants;
-    }
 
     public Equipe() {
 
     }
 
-    @Override
-    public String toString() {
-        return "Equipe{" +
-                "idEquipe=" + idEquipe +
-                ", nomEquipe='" + nomEquipe + '\'' +
-                ", niveau=" + niveau +
-                ", Equipe_Detail=" + Equipe_Detail +
-                ", etudiants=" + etudiants +
-                '}';
-    }
+
 }

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity(name = "Etudiant")
+@AllArgsConstructor
 @Getter
 @Setter
 public class Etudiant implements Serializable {
@@ -25,39 +26,9 @@ public class Etudiant implements Serializable {
     @ManyToOne
     private Departement departement;
 
-    @ManyToMany(mappedBy = "etudiants", fetch = FetchType.EAGER)
+    @ManyToMany()
     private Set<Equipe> equipes;
 
     public Etudiant() {
-    }
-
-    public Etudiant(Long idEtudiant, String prenom, String nom, Option option, Set<Contrat> contrats, Departement departement, Set<Equipe> equipes) {
-        this.idEtudiant = idEtudiant;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.option = option;
-        this.contrats = contrats;
-        this.departement = departement;
-        this.equipes = equipes;
-    }
-
-    public Etudiant(Long idEtudiant, String prenom, String nom, Option option) {
-        this.idEtudiant = idEtudiant;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.option = option;
-    }
-
-    @Override
-    public String toString() {
-        return "Etudiant{" +
-                "idEtudiant=" + idEtudiant +
-                ", prenom='" + prenom + '\'' +
-                ", nom='" + nom + '\'' +
-                ", option=" + option +
-                ", contrats=" + contrats +
-                ", departement=" + departement +
-                ", equipes=" + equipes +
-                '}';
     }
 }

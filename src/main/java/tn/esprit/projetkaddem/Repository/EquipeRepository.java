@@ -6,18 +6,12 @@ import tn.esprit.projetkaddem.Entities.Equipe;
 
 import java.util.List;
 
-@Repository
+
 public interface EquipeRepository extends JpaRepository<Equipe,Long> {
 
 
-    List<Equipe> findByEtudiantsIdEtudiant (Long idEtudiant);
+    //List<Equipe> findEquipeByDetailEquipeThematiqueLike(String thematique);
 
-    List<Equipe> findByEtudiantsIdEtudiantAndDetailEquipeThematiqueNotNull (Long idEtudiant);
-
-
-
-
-
-
+    List<Equipe> findEquipeByDetailEquipeThematique(String tg);
 
 }

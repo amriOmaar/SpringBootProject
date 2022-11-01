@@ -1,6 +1,7 @@
 package tn.esprit.projetkaddem.Service;
 
 import tn.esprit.projetkaddem.Entities.Equipe;
+import tn.esprit.projetkaddem.Repository.EquipeRepository;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ public interface IEquipeService {
     public String deleteEquipe(Long idEquipe);
     public Equipe upadateEquipe(Equipe equipe);
 
+   // List<Equipe> findEquipeByDetailEquipeThematiqueLike(String thematique);
 
-    List<Equipe> findByEtudiantsIdEtudiant (Long idEtudiant);
-
+    List<Equipe> findEquipeByDetailEquipeThematique(String tg);
 
 
 

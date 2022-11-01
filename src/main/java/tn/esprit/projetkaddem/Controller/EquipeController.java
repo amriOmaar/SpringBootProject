@@ -14,7 +14,6 @@ import java.util.List;
 public class EquipeController {
 
 
-
     EquipeService equipeService;
 
     //creating a get mapping that retrieves all the Equipes detail from the database
@@ -43,15 +42,9 @@ public class EquipeController {
     }
 
 
-
-
-    @GetMapping("/findByetudiantsIdEtudiant/{idEtudiant}")
-    public List<Equipe> findByEtudiantsIdEtudiant (Long idEtudiant) {
-        return equipeService.findByEtudiantsIdEtudiant(idEtudiant);
-
+    @GetMapping("/findequipeDetailequipe/{tg}")
+    public List<Equipe> findEquipeByDetailEquipeThematiqueLike(@PathVariable("tg") String thematique){
+        return equipeService.findEquipeByDetailEquipeThematique(thematique);
     }
-
-
-
 
 }

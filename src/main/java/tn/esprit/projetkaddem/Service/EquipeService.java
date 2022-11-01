@@ -8,7 +8,7 @@ import tn.esprit.projetkaddem.Repository.EquipeRepository;
 
 import java.util.List;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Service
 public class EquipeService implements IEquipeService {
 
@@ -43,24 +43,17 @@ public class EquipeService implements IEquipeService {
         Equipe existingEquipe = equipeRepository.findById(equipe.getIdEquipe()).orElse(null);
         existingEquipe.setNomEquipe(equipe.getNomEquipe());
         existingEquipe.setNiveau(equipe.getNiveau());
-        existingEquipe.setEquipe_Detail(equipe.getEquipe_Detail());
+        existingEquipe.setDetailEquipe(equipe.getDetailEquipe());
         existingEquipe.setEtudiants(equipe.getEtudiants());
 
         return equipeRepository.save(existingEquipe);
+
     }
-
-
-
-
-
 
     @Override
-    public List<Equipe> findByEtudiantsIdEtudiant (Long idEtudiant) {
-        return equipeRepository.findByEtudiantsIdEtudiant(idEtudiant);
-
+    public List<Equipe> findEquipeByDetailEquipeThematique(String tg) {
+        return equipeRepository.findEquipeByDetailEquipeThematique(tg);
     }
-
-
 
 
 }
