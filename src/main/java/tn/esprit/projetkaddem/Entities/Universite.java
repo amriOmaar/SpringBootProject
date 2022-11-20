@@ -1,6 +1,8 @@
 package tn.esprit.projetkaddem.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +12,7 @@ import java.util.Set;
 
 @Entity(name = "Universite")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Universite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

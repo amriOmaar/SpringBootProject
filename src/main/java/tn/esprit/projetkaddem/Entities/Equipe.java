@@ -6,14 +6,14 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 
 @Entity(name = "Equipe")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Equipe implements Serializable {
 
     @Id
@@ -27,7 +27,6 @@ public class Equipe implements Serializable {
     private DetailEquipe detailEquipe;
 
     @ManyToMany(mappedBy = "equipes")
-    @JsonIgnore
     private Set<Etudiant> etudiants;
 
 

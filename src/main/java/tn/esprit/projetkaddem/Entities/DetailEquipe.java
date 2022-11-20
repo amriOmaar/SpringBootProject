@@ -3,6 +3,7 @@ package tn.esprit.projetkaddem.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,7 @@ import java.io.Serializable;
 
 @Entity(name = "DetailEquipe")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class DetailEquipe implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,6 @@ public class DetailEquipe implements Serializable {
     @OneToOne(mappedBy = "detailEquipe")
     @JsonIgnore
     private Equipe equipe;
-
-
 
     public DetailEquipe() {
     }

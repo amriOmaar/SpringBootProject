@@ -5,14 +5,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import tn.esprit.projetkaddem.Entities.Specialite;
 
 @Entity(name = "Contrat")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Contrat  implements Serializable {
 
     @Id

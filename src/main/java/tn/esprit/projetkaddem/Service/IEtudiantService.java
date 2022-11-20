@@ -1,5 +1,6 @@
 package tn.esprit.projetkaddem.Service;
 
+import tn.esprit.projetkaddem.Entities.Contrat;
 import tn.esprit.projetkaddem.Entities.Equipe;
 import tn.esprit.projetkaddem.Entities.Etudiant;
 
@@ -19,6 +20,13 @@ public interface IEtudiantService {
 
     public String deleteEtudiant(Long idEtudiant);
     public Etudiant upadateEtudiant(Etudiant etudiant);
+
+
+
+    public void assignEtudiantToDepartement (Long idEtudiant, Long idDepart);
+
+    Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant etudiant, Long idContrat, Long idEquipe);
+
 
 
 

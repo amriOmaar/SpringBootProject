@@ -17,4 +17,6 @@ public interface IContratService {
     public String deleteContrat(Long idContrat);
 
     public Contrat upadateContrat(Contrat contrat);
+
+    public Contrat affectContratToEtudiant(Contrat ce, String nom,String prenom);
 }

@@ -1,6 +1,8 @@
 package tn.esprit.projetkaddem.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +12,7 @@ import java.util.Set;
 
 @Entity(name = "Departement")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
     public class Departement implements Serializable {
 
     @Id
@@ -19,7 +20,11 @@ import java.util.Set;
     private Long idDepart;
     private String nomDepart;
 
-    @OneToMany(mappedBy = "departement")
+    /*@OneToMany(mappedBy = "departement")
+    @JsonIgnore
+    private Set<Etudiant> etudiants;*/
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departement")
     private Set<Etudiant> etudiants;
 
 

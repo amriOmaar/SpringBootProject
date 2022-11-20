@@ -1,5 +1,6 @@
 package tn.esprit.projetkaddem.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,8 +9,7 @@ import java.util.Set;
 
 @Entity(name = "Etudiant")
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class Etudiant implements Serializable {
 
     @Id
@@ -24,9 +24,11 @@ public class Etudiant implements Serializable {
     private Set<Contrat> contrats;
 
     @ManyToOne
+    @JsonIgnore
     private Departement departement;
 
     @ManyToMany()
+    @JsonIgnore
     private Set<Equipe> equipes;
 
     public Etudiant() {

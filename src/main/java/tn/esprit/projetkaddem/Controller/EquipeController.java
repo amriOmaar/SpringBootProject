@@ -16,27 +16,31 @@ public class EquipeController {
 
     EquipeService equipeService;
 
-    //creating a get mapping that retrieves all the Equipes detail from the database
-    @GetMapping("/Equipes")
+
+    @GetMapping("/allEquipes")
     private List<Equipe> getAllEquipes() {
         return equipeService.getEquipes();
     }
 
-    //creating a get mapping that retrieves the detail of a specific Equipe
-    @PostMapping("/AddEquipe")
-    public Equipe addEquipe (@RequestBody Equipe equipe){
+
+    @PostMapping("/addEquipe")
+    public Equipe saveEquipe (@RequestBody Equipe equipe){
         return equipeService.saveEquipe(equipe);
     }
-    @PostMapping("/AddEquipes")
+
+
+    @PostMapping("/addEquipes")
     public List<Equipe> addEquipes (@RequestBody List<Equipe> equipes){
         return equipeService.saveEquipes(equipes);
     }
-    @PutMapping("/UpdateEquipe")
+
+
+    @PutMapping("/updateEquipe")
     public Equipe updateEquipe (@RequestBody Equipe equipe){
         return equipeService.upadateEquipe(equipe);
     }
 
-    @DeleteMapping("/DeleteEquipe/{idEquipe}")
+    @DeleteMapping("/deleteEquipe/{idEquipe}")
     public String deleteEquipe (@PathVariable Long idEquipe){
         return equipeService.deleteEquipe(idEquipe);
     }

@@ -41,11 +41,7 @@ public class DetailEquipeService implements IDetailEquipeService {
 
     @Override
     public DetailEquipe upadateDetailEquipe(DetailEquipe detailEquipe){
-        DetailEquipe existingDetailEquipe = DetailEquipeRepository.findById(detailEquipe.getIdDetailEquipe()).orElse(null);
-        existingDetailEquipe.setSalle(detailEquipe.getSalle());
-        existingDetailEquipe.setThematique(detailEquipe.getThematique());
-        existingDetailEquipe.setEquipe(detailEquipe.getEquipe());
-        return DetailEquipeRepository.save(existingDetailEquipe);
+        return DetailEquipeRepository.save(detailEquipe);
     }
 
 

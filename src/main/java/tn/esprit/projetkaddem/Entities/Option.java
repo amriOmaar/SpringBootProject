@@ -2,6 +2,6 @@ package tn.esprit.projetkaddem.Entities;
 
 public enum Option {
 
-    GAMIX, SE, SIM, NIDS
+    TWIN, GAMIX, SE, SIM, NIDS
 
     }

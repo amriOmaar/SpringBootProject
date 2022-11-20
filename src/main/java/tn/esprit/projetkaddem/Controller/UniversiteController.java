@@ -14,34 +14,39 @@ import java.util.List;
 public class UniversiteController {
 
 
-    UniversiteService UniversiteService;
+    UniversiteService universiteService;
 
     //creating a get mapping that retrieves all the Universites detail from the database
     @GetMapping("/universites")
     private List<Universite> getAlluniversites() {
-        return UniversiteService.getUniversites();
+        return universiteService.getUniversites();
     }
 
 
 
-    @PostMapping("/AddUniversite")
+    @PostMapping("/addUniversite")
     public Universite addUniversite (@RequestBody Universite universite){
-        return UniversiteService.saveUniversite(universite);
+        return universiteService.saveUniversite(universite);
     }
-    @PostMapping("/AddUniversites")
+    @PostMapping("/addUniversites")
     public List<Universite> addUniversites (@RequestBody List<Universite> universites){
-        return UniversiteService.saveUniversites(universites);
+        return universiteService.saveUniversites(universites);
     }
-    @PutMapping("/UpdateUniversite")
+    @PutMapping("/updateUniversite")
     public Universite updateUniversite (@RequestBody Universite universite){
-        return UniversiteService.upadateUniversite(universite);
+        return universiteService.upadateUniversite(universite);
     }
 
-    @DeleteMapping("/DeleteUniversite/{idUniv}")
+    @DeleteMapping("/deleteUniversite/{idUniv}")
     public String deleteUniversite (@PathVariable Long idUniv){
-        return UniversiteService.deleteUniversite(idUniv);
+        return universiteService.deleteUniversite(idUniv);
     }
 
 
+    @PutMapping("/assignUniversiteToDepartement/{idUniversite}/{idDepartement}")
+    public void assignUniversiteToDepartement(@PathVariable("idUniversite") Long idUniversite,@PathVariable("idDepartement") Long idDepartement) {
+        universiteService.assignUniversiteToDepartement(idUniversite, idDepartement);
+
+    }
 
 }
