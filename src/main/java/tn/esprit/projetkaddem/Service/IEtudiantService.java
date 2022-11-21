@@ -25,7 +25,10 @@ public interface IEtudiantService {
 
     public void assignEtudiantToDepartement (Long idEtudiant, Long idDepart);
 
-    Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant etudiant, Long idContrat, Long idEquipe);
+    public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Long idContrat, Long idEquipe);
+
+    List<Etudiant> getEtudiantsByDepartement (Long idDepart);
+
 
 
 

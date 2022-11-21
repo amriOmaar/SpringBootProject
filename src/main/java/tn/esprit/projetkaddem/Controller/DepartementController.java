@@ -19,13 +19,12 @@ public class DepartementController {
 
     IDepartementService departementService;
 
-
-    @GetMapping("/getallDepart")
-    public List<Departement> getAllDepartements(){
-        return departementService.getAllDepartements();
+    @GetMapping("/getDepartements")
+    public List<Departement> getDepartements(){
+        return departementService.getDepartements();
     }
 
-    @GetMapping("/getById/{idDep}")
+    @GetMapping("/getDepartmentById/{idDep}")
     public Departement getDepartementByID(@PathVariable("idDep") Long idDep){
         return departementService.getDepartementByID(idDep);
     }
@@ -52,13 +51,19 @@ public class DepartementController {
 
     @GetMapping("/getDeptByOption/{option}")
     public Set<Set<Etudiant>> getEtudiantbyoption(@PathVariable("option") String option) {
-        return departementService.getAllDepartements().stream().
+        return departementService.getDepartements().stream().
                 map(departement -> departement.getEtudiants().
                         stream().
                         filter(etudiant ->  Objects.equals(etudiant.getOption().toString(), option)).
                         collect(Collectors.toSet())).
                 collect(Collectors.toSet());
 
+    }
+
+    @GetMapping("/getDepartByUniversity/{idUniversite}")
+    public Set<Departement> GetDepByIdUni(@PathVariable("idUniversite") Long idUniversite){
+
+        return  departementService.retrieveDepartementsByUniversite(idUniversite);
     }
 
 

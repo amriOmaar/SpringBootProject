@@ -3,6 +3,8 @@ package tn.esprit.projetkaddem.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.projetkaddem.Entities.Departement;
+import tn.esprit.projetkaddem.Entities.Equipe;
 import tn.esprit.projetkaddem.Entities.Etudiant;
 import tn.esprit.projetkaddem.Service.EtudiantService;
 import tn.esprit.projetkaddem.Service.IContratService;
@@ -74,6 +76,14 @@ public class EtudiantController {
                                                             @PathVariable("idContrat") Long idContrat){
         Etudiant etudiant =this.etudiantService.addAndAssignEtudiantToEquipeAndContract(e,idEquipe,idContrat);
         return etudiant;
+    }
+
+
+    @GetMapping("/getEtudiantsByDepartement/{idDepart}")
+    public List<Etudiant> getEtudiantsByDepartement(@PathVariable("idDepart") Long idDepart){
+
+
+        return etudiantService.getEtudiantsByDepartement(idDepart);
     }
 
 

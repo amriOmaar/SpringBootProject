@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.projetkaddem.Entities.Departement;
 import tn.esprit.projetkaddem.Entities.Etudiant;
+import tn.esprit.projetkaddem.Entities.Option;
 import tn.esprit.projetkaddem.Entities.Universite;
 import tn.esprit.projetkaddem.Repository.DepartmentRepository;
+import tn.esprit.projetkaddem.Repository.UniversiteRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Service
@@ -17,14 +20,16 @@ public class DepartementService implements IDepartementService {
 
     DepartmentRepository departmentRepository;
 
+    UniversiteRepository universiteRepository;
+
     @Override
-    public List<Departement> getAllDepartements() {
+    public List<Departement> getDepartements() {
         return departmentRepository.findAll();
     }
 
     @Override
     public Departement getDepartementByID(Long idDep){
-        return departmentRepository.findById(idDep).get();
+        return departmentRepository.findById(idDep).orElse(null);
     }
 
     @Override
@@ -53,16 +58,11 @@ public class DepartementService implements IDepartementService {
         }
         return departmentRepository.save(toUpdateDepartement);
 
+    }
 
-        /*
-        if (departmentRepository.findById(idDepartement).isPresent()) {
-            Departement toUpdateDepartement = departmentRepository.findById(idDepartement).get();
-            toUpdateDepartement.setNomDepart(departement.getNomDepart());
-
-            return departmentRepository.save(toUpdateDepartement);
-        }
-        return departement;
-    */
+    @Override
+    public List<Departement> retrieveDepartementByOptionEtudiant(Option op) {
+        return departmentRepository.retrieveDepartementByOptionEtudiant(op);
     }
 /*
     @Override
@@ -71,5 +71,15 @@ public class DepartementService implements IDepartementService {
 
         return departmentRepository.findDepartementByEtudiantsOption(option);
     }*/
+
+
+
+    @Override
+    public Set<Departement> retrieveDepartementsByUniversite(Long idUniversite) {
+
+        Universite university=universiteRepository.findById(idUniversite).orElse(null);
+        return  university.getDepartements();
+    }
+
 }
 

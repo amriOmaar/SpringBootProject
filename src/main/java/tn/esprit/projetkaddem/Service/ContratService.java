@@ -10,6 +10,7 @@ import tn.esprit.projetkaddem.Entities.Etudiant;
 import tn.esprit.projetkaddem.Repository.ContratRepository;
 import tn.esprit.projetkaddem.Repository.EtudiantRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -78,5 +79,47 @@ public class ContratService implements IContratService{
 
         return ce;
     }
+
+    @Override
+    public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
+
+        float CA=0;
+        int nbOfMonths=1;
+
+        List< Contrat> contrat= contratRepository.findAll();
+        for(int i=0;i<contrat.size();i++){
+            Contrat ct=contrat.get(i);
+            int dd=Integer.parseInt(ct.getDateDebutContrat().toString().substring(5,7));
+            int df=Integer.parseInt(ct.getDateFinContrat().toString().substring(5,7));
+
+            if((nbOfMonths*=(df-dd))==0){
+                nbOfMonths=1;
+            }else{
+                nbOfMonths=(df-dd);
+            }
+            if(ct.getArchive()==false){
+
+                System.out.println("*******"+nbOfMonths);
+
+                if(ct.getSpecialite().toString()=="IA"){
+                    CA+=nbOfMonths*300;
+
+                }
+                else if(ct.getSpecialite().toString()=="RESEAUX"){
+                    CA+=nbOfMonths*350;
+                }
+                else if(ct.getSpecialite().toString()=="CLOUD"){
+                    CA+=nbOfMonths*400;
+                }
+                else if(ct.getSpecialite().toString()=="SECURITE"){
+                    CA+=nbOfMonths*450;
+                }
+
+            }
+
+        }
+        return CA;
+    }
+
 
 }

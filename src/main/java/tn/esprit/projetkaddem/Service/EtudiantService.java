@@ -14,6 +14,7 @@ import tn.esprit.projetkaddem.Repository.EtudiantRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 
 
 @AllArgsConstructor
@@ -79,6 +80,7 @@ public class EtudiantService implements IEtudiantService {
     }
 
 
+
     // on va toucher plusieur tables (table --> entity managed) (.add(e) si exist add to equipe
     // sinon add to etudiant then equipe
     @Transactional
@@ -94,6 +96,11 @@ public class EtudiantService implements IEtudiantService {
         return e;
     }
 
+    @Override
+    public List<Etudiant> getEtudiantsByDepartement(Long idDepart) {
+
+        return etudiantRepository.findByDepartementIdDepart(idDepart);
+    }
 
 }
 

@@ -2,6 +2,7 @@ package tn.esprit.projetkaddem.Service;
 
 import tn.esprit.projetkaddem.Entities.Contrat;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IContratService {
@@ -19,4 +20,6 @@ public interface IContratService {
     public Contrat upadateContrat(Contrat contrat);
 
     public Contrat affectContratToEtudiant(Contrat ce, String nom,String prenom);
+
+    float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate);
 }

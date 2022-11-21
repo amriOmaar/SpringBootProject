@@ -1,15 +1,21 @@
 package tn.esprit.projetkaddem.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import tn.esprit.projetkaddem.Entities.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-@Entity(name = "Etudiant")
+@Getter
+@Setter
+@Entity
+@ToString
+@Builder
 @AllArgsConstructor
-@Data
+@NoArgsConstructor
 public class Etudiant implements Serializable {
 
     @Id
@@ -21,6 +27,7 @@ public class Etudiant implements Serializable {
     private Option option;
 
     @OneToMany(mappedBy = "etudiant")
+    @JsonIgnore
     private Set<Contrat> contrats;
 
     @ManyToOne
@@ -31,6 +38,5 @@ public class Etudiant implements Serializable {
     @JsonIgnore
     private Set<Equipe> equipes;
 
-    public Etudiant() {
-    }
+
 }

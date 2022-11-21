@@ -51,4 +51,5 @@ public class EquipeController {
         return equipeService.findEquipeByDetailEquipeThematique(thematique);
     }
 
+
 }

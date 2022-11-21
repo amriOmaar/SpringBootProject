@@ -2,13 +2,15 @@ package tn.esprit.projetkaddem.Service;
 
 import tn.esprit.projetkaddem.Entities.Departement;
 import tn.esprit.projetkaddem.Entities.Etudiant;
+import tn.esprit.projetkaddem.Entities.Option;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IDepartementService {
 
 
-    public List<Departement> getAllDepartements();
+    public List<Departement> getDepartements();
 
     public Departement getDepartementByID(Long idDep);
 
@@ -23,6 +25,10 @@ public interface IDepartementService {
     public Departement upadateDepartement(Long idDepartement, Departement departement);
 
     /*public Departement findDepartementByEtudiants(String option);*/
+
+    public List<Departement> retrieveDepartementByOptionEtudiant(Option op);
+
+    public Set<Departement> retrieveDepartementsByUniversite(Long idUniversite);
 
 
 }
