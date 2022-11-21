@@ -49,6 +49,8 @@ public class DepartementController {
         return departementService.deleteDepartement(idDepartement);
     }
 
+    /*
+
     @GetMapping("/getDeptByOption/{option}")
     public Set<Set<Etudiant>> getEtudiantbyoption(@PathVariable("option") String option) {
         return departementService.getDepartements().stream().
@@ -60,10 +62,39 @@ public class DepartementController {
 
     }
 
+     */
+
     @GetMapping("/getDepartByUniversity/{idUniversite}")
     public Set<Departement> GetDepByIdUni(@PathVariable("idUniversite") Long idUniversite){
 
         return  departementService.retrieveDepartementsByUniversite(idUniversite);
+    }
+
+    @PostMapping("/addDeaprtToUniv/{idUniversite}")
+    public  void addDepartementToUniversity(@RequestBody Departement depart,@PathVariable("idUniversite") Long idUniversite){
+        departementService.addDepartementToUniversity(depart,idUniversite);
+    }
+
+    @GetMapping("/getDepartBynomprenom/{nom}/{prenom}")
+    public List<Departement> getDepartBynomprenom(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom){
+
+        return  departementService.getDepartByNomPrenom(nom, prenom);
+    }
+
+
+    @GetMapping("/nbrDeparts")
+    public String NbrDeparts(){
+        return departementService.nbrDepart();
+    }
+
+    @GetMapping("/nbrEtu")
+    public long NbrEtud(){
+        return departementService.nbrEtudByDepart();
+    }
+
+    @GetMapping("/nbrEtudOneDeprt/{idDeprt}")
+    public long NbrEtudOneDeprt(@PathVariable("idDeprt") Long idDeprt){
+        return departementService.nbrEtudByOneDepart(idDeprt);
     }
 
 

@@ -20,4 +20,12 @@ public interface DepartmentRepository extends JpaRepository<Departement, Long> {
     List<Departement> retrieveDepartementByOptionEtudiant(@Param("op") Option op);
 
 
+    @Query("SELECT  departement FROM Departement  departement  , Etudiant e where departement.idDepart=e.departement.idDepart and e.nom = :nom and e.prenom = :prenom")
+    List<Departement> getDepartementByNomAndPrenomEtudiant(@Param("nom") String nom, @Param("prenom") String prenom);
+
+
+
+
+
+
 }

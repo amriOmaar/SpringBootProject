@@ -62,23 +62,39 @@ public class ContratService implements IContratService{
         return contratRepository.save(existingContrat);
     }
 
-
     @Override
     public Contrat affectContratToEtudiant(Contrat ce, String nom, String prenom) {
-
-
-        Etudiant etudiant = etudiantRepository.findByNom(nom);
-        Etudiant etudiantp = etudiantRepository.findByPrenom(prenom);
-
-        etudiant.setContrats((Set<Contrat>) ce);
-        etudiantp.setContrats((Set<Contrat>) ce);
-
-
-        etudiantRepository.save(etudiant);
-        etudiantRepository.save(etudiantp);
+        Etudiant etudiant=etudiantRepository.findByPrenom(prenom);
+        if (etudiant.getContrats().size()<5) {
+            ce.setEtudiant(etudiant);
+            contratRepository.save(ce);
+        }
+        else{
+            System.out.println("Cannot Affect anymore");
+        }
 
         return ce;
     }
+
+
+    @Override
+    public Integer nbContratsValides(Date startDate, Date endDate) {
+        int j=0 ;
+
+        List< Contrat> contrat= contratRepository.findAll();
+
+        for(int i=0;i<contrat.size();i++){
+            Contrat ct=contrat.get(i);
+
+            if(ct.getArchive()==false){
+                j++;
+                System.out.println("Les contrats dispo :" + j);
+            }
+
+        }
+        return j;
+    }
+
 
     @Override
     public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {

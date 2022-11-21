@@ -30,5 +30,15 @@ public interface IDepartementService {
 
     public Set<Departement> retrieveDepartementsByUniversite(Long idUniversite);
 
+    public Departement addDepartementToUniversity(Departement deprt, Long idUniversite);
+
+    public List<Departement> getDepartByNomPrenom(String nom, String prenom);
+
+    public String nbrDepart();
+    public long nbrEtudByDepart();
+
+    public long nbrEtudByOneDepart(Long idDeprt);
+
+
 
 }
