@@ -36,7 +36,7 @@ public class UniversiteService implements IUniversite {
         return "Universite supprimé !" +idUniversite;
     }
     public Universite upadateUniversite(Universite universite){
-        Universite existingUniversite = universiteRepository.findById(universite.getIdUniv()).orElse(null);
+        Universite existingUniversite = universiteRepository.findById(universite.getId()).orElse(null);
         existingUniversite.setNomUniv(universite.getNomUniv());
         existingUniversite.setDepartements(universite.getDepartements());
         return universiteRepository.save(existingUniversite);

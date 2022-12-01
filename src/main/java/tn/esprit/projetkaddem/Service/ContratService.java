@@ -52,7 +52,7 @@ public class ContratService implements IContratService{
 
     @Override
     public Contrat upadateContrat(Contrat contrat){
-        Contrat existingContrat = contratRepository.findById(contrat.getIdContrat()).orElse(null);
+        Contrat existingContrat = contratRepository.findById(contrat.getId()).orElse(null);
         assert existingContrat != null;
         existingContrat.setDateDebutContrat(contrat.getDateDebutContrat());
         existingContrat.setDateFinContrat(contrat.getDateFinContrat());

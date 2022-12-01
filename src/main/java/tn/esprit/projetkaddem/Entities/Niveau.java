@@ -1,6 +1,6 @@
 package tn.esprit.projetkaddem.Entities;
 
-public enum niveau {
+public enum Niveau {
 
     JUNIOR, SENIOR, EXPERT
 

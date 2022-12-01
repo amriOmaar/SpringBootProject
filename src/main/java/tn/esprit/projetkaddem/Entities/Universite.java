@@ -10,13 +10,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-@Entity(name = "Universite")
+@Entity
 @AllArgsConstructor
 @Data
 public class Universite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUniv;
+    private Long id;
     private String nomUniv;
 
     @OneToMany

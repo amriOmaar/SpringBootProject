@@ -16,11 +16,11 @@ public interface DepartmentRepository extends JpaRepository<Departement, Long> {
 
     /*Departement findDepartementByEtudiantsOption(String option);*/
 
-    @Query("SELECT  departement FROM Departement  departement  , Etudiant e where departement.idDepart=e.departement.idDepart and e.option = :op")
+    @Query("SELECT  departement FROM Departement  departement  , Etudiant e where departement.id=e.departement.id and e.option = :op")
     List<Departement> retrieveDepartementByOptionEtudiant(@Param("op") Option op);
 
 
-    @Query("SELECT  departement FROM Departement  departement  , Etudiant e where departement.idDepart=e.departement.idDepart and e.nom = :nom and e.prenom = :prenom")
+    @Query("SELECT  departement FROM Departement  departement  , Etudiant e where departement.id=e.departement.id and e.nom = :nom and e.prenom = :prenom")
     List<Departement> getDepartementByNomAndPrenomEtudiant(@Param("nom") String nom, @Param("prenom") String prenom);
 
 

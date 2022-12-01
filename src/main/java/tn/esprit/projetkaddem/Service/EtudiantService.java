@@ -100,7 +100,7 @@ public class EtudiantService implements IEtudiantService {
 
     @Override
     public List<Etudiant> getEtudiantsByDepartement(Long idDepart) {
-        return etudiantRepository.findByDepartementIdDepart(idDepart);
+        return etudiantRepository.findByDepartementId(idDepart);
     }
 
 

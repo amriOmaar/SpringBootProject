@@ -20,7 +20,7 @@ public class Etudiant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEtudiant;
+    private Long id;
     private String prenom;
     private String nom;
     @Enumerated(EnumType.STRING)

@@ -11,17 +11,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 
-@Entity(name = "Equipe")
+@Entity
 @AllArgsConstructor
 @Data
 public class Equipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipe;
+    private Long id;
     private String nomEquipe;
     @Enumerated(EnumType.STRING)
-    private niveau niveau;
+    private Niveau niveau;
 
     @OneToOne
     private DetailEquipe detailEquipe;

@@ -10,14 +10,14 @@ import lombok.Getter;
 import lombok.Setter;
 import tn.esprit.projetkaddem.Entities.Specialite;
 
-@Entity(name = "Contrat")
+@Entity
 @AllArgsConstructor
 @Data
 public class Contrat  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idContrat;
+    private Long id;
     @Temporal (TemporalType.DATE)
     private Date dateDebutContrat;
     @Temporal (TemporalType.DATE)

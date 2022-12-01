@@ -19,7 +19,7 @@ import java.util.Set;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idDepart;
+    private Long id;
     private String nomDepart;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "departement")
