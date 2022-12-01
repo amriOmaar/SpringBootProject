@@ -11,6 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 public class UniversiteController {
 
 
@@ -24,7 +25,7 @@ public class UniversiteController {
 
 
 
-    @PostMapping("/addUniversite")
+    @PostMapping("/addUniv")
     public Universite addUniversite (@RequestBody Universite universite){
         return universiteService.saveUniversite(universite);
     }

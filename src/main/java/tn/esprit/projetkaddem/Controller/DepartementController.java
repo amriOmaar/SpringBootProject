@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 public class DepartementController {
 
     IDepartementService departementService;
@@ -39,14 +40,14 @@ public class DepartementController {
         return departementService.saveDepartements(departements);
     }
 
-    @PutMapping("/update/{idDepartement}")
-    public Departement updateDepartement (@PathVariable("idDepartement") Long idDepartement, @RequestBody Departement departement){
-        return departementService.upadateDepartement(idDepartement, departement);
+    @PutMapping("/updateDepart/{idDepart}")
+    public Departement updateDepartement (@PathVariable("idDepart") Long idDepart, @RequestBody Departement departement){
+        return departementService.upadateDepartement(idDepart, departement);
     }
 
-    @DeleteMapping("/delete/{idDepartement}")
-    public String deleteDepartement (@PathVariable Long idDepartement){
-        return departementService.deleteDepartement(idDepartement);
+    @DeleteMapping("/deleteDepart/{idDepart}")
+    public String deleteDepartement (@PathVariable Long idDepart){
+        return departementService.deleteDepartement(idDepart);
     }
 
     /*
@@ -64,16 +65,20 @@ public class DepartementController {
 
      */
 
-    @GetMapping("/getDepartByUniversity/{idUniversite}")
+    @GetMapping("/retrieveDepartByUniv/{idUniversite}")
     public Set<Departement> GetDepByIdUni(@PathVariable("idUniversite") Long idUniversite){
 
         return  departementService.retrieveDepartementsByUniversite(idUniversite);
     }
 
-    @PostMapping("/addDeaprtToUniv/{idUniversite}")
-    public  void addDepartementToUniversity(@RequestBody Departement depart,@PathVariable("idUniversite") Long idUniversite){
-        departementService.addDepartementToUniversity(depart,idUniversite);
+    @PostMapping("/addDepartToUniv/{idUniversite}")
+    @ResponseBody
+    public void addEtudtoEqpandContrat(@RequestBody Departement D,
+                                        @PathVariable("idUniversite") Long idU){
+        departementService.addDepartementToUniversity(D,idU);
     }
+
+
 
     @GetMapping("/getDepartBynomprenom/{nom}/{prenom}")
     public List<Departement> getDepartBynomprenom(@PathVariable("nom") String nom, @PathVariable("prenom") String prenom){
@@ -87,16 +92,14 @@ public class DepartementController {
         return departementService.nbrDepart();
     }
 
-    @GetMapping("/nbrEtu")
-    public long NbrEtud(){
+    @GetMapping("/nbrEtuByDeprt")
+    public Long NbrEtud(){
         return departementService.nbrEtudByDepart();
     }
 
-    @GetMapping("/nbrEtudOneDeprt/{idDeprt}")
-    public long NbrEtudOneDeprt(@PathVariable("idDeprt") Long idDeprt){
-        return departementService.nbrEtudByOneDepart(idDeprt);
+    @GetMapping("/nbrEtudOneDeprt/{nomDepart}")
+    public long NbrEtudOneDeprt(@PathVariable("nomDepart") String nomDepart){
+        return departementService.nbrEtudByOneDepart(nomDepart);
     }
-
-
 
 }

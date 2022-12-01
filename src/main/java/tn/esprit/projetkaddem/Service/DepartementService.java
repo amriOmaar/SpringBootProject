@@ -8,6 +8,7 @@ import tn.esprit.projetkaddem.Repository.EquipeRepository;
 import tn.esprit.projetkaddem.Repository.EtudiantRepository;
 import tn.esprit.projetkaddem.Repository.UniversiteRepository;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 
@@ -65,19 +66,21 @@ public class DepartementService implements IDepartementService {
 
 
 
-
     @Override
     public Set<Departement> retrieveDepartementsByUniversite(Long idUniversite) {
-
         Universite university=universiteRepository.findById(idUniversite).orElse(null);
         return  university.getDepartements();
     }
 
 
+    @Override
     public Departement addDepartementToUniversity(Departement deprt, Long idUniversite){
 
         Universite univ = universiteRepository.findById(idUniversite).orElse(null);
+        departmentRepository.save(deprt);
         univ.getDepartements().add(deprt);
+
+        universiteRepository.save(univ);
 
         return deprt;
     }
@@ -97,31 +100,32 @@ public class DepartementService implements IDepartementService {
         List<Departement> Listdepts = departmentRepository.findAll();
 
         for(int i=0;i<Listdepts.size();i++){
-                j++;
+            j++;
         }
         return "On a " + j + " Departements";
     }
 
 
+
     @Override
-    public long nbrEtudByDepart() {
+    public Long nbrEtudByDepart() {
         long nbrEtu=0 ;
 
         List<Departement> Listdepts = departmentRepository.findAll();
 
         for(int i=0;i<Listdepts.size();i++){
-            Departement d = Listdepts.get(i);
-            return nbrEtu = d.getEtudiants().stream().map(e -> e.getDepartement()).count();
+            return nbrEtu = Listdepts.get(i).getEtudiants().stream().map(e -> e.getDepartement()).count();
+
         }
         return nbrEtu;
     }
 
 
     @Override
-    public long nbrEtudByOneDepart(Long idDeprt) {
+    public long nbrEtudByOneDepart(String nomDepart) {
         long nbrEtu=0 ;
 
-        Departement d = this.departmentRepository.findById(idDeprt).orElse(null);
+        Departement d = this.departmentRepository.findByNomDepart(nomDepart);
 
             return nbrEtu = d.getEtudiants().stream().map(e -> e.getDepartement()).count();
 

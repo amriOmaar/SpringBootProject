@@ -14,6 +14,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 public class EtudiantController {
 
     IEtudiantService etudiantService;
@@ -79,9 +80,9 @@ public class EtudiantController {
     }
 
 
+
     @GetMapping("/getEtudiantsByDepartement/{idDepart}")
     public List<Etudiant> getEtudiantsByDepartement(@PathVariable("idDepart") Long idDepart){
-
 
         return etudiantService.getEtudiantsByDepartement(idDepart);
     }

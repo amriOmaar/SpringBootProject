@@ -78,64 +78,87 @@ public class ContratService implements IContratService{
 
 
     @Override
-    public Integer nbContratsValides(Date startDate, Date endDate) {
+    public Integer nbContratsValides(Date DD, Date DF) {
         int j=0 ;
+        List< Contrat> listContrats= contratRepository.findAll();
 
-        List< Contrat> contrat= contratRepository.findAll();
+        for(int i=0;i<listContrats.size();i++){
+            Contrat c=listContrats.get(i);
 
-        for(int i=0;i<contrat.size();i++){
-            Contrat ct=contrat.get(i);
-
-            if(ct.getArchive()==false){
+            if(c.getArchive()==false){
                 j++;
-                System.out.println("Les contrats dispo :" + j);
+                System.out.println("Les contrats dispo sont :" + j);
             }
 
         }
+
+
         return j;
     }
 
 
     @Override
-    public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
+    public float getChiffreAffaireEntreDeuxDate(Date DD, Date DF) {
 
-        float CA=0;
-        int nbOfMonths=1;
+        float ciffreAff=0;
+        int nbrMois=1;
 
-        List< Contrat> contrat= contratRepository.findAll();
+        List<Contrat> contrat= contratRepository.findAll();
+
         for(int i=0;i<contrat.size();i++){
-            Contrat ct=contrat.get(i);
-            int dd=Integer.parseInt(ct.getDateDebutContrat().toString().substring(5,7));
-            int df=Integer.parseInt(ct.getDateFinContrat().toString().substring(5,7));
+            Contrat c=contrat.get(i);
+            int dd=Integer.parseInt(c.getDateDebutContrat().toString().substring(5,7));
+            int df=Integer.parseInt(c.getDateFinContrat().toString().substring(5,7));
 
-            if((nbOfMonths*=(df-dd))==0){
-                nbOfMonths=1;
-            }else{
-                nbOfMonths=(df-dd);
-            }
-            if(ct.getArchive()==false){
+                nbrMois=(df-dd);
 
-                System.out.println("*******"+nbOfMonths);
+            if(c.getArchive()==false){
 
-                if(ct.getSpecialite().toString()=="IA"){
-                    CA+=nbOfMonths*300;
+                System.out.println("*******"+nbrMois);
+
+                if(c.getSpecialite().toString()=="IA"){
+                    ciffreAff+=nbrMois*300;
 
                 }
-                else if(ct.getSpecialite().toString()=="RESEAUX"){
-                    CA+=nbOfMonths*350;
+                else if(c.getSpecialite().toString()=="RESEAUX"){
+                    ciffreAff+=nbrMois*350;
                 }
-                else if(ct.getSpecialite().toString()=="CLOUD"){
-                    CA+=nbOfMonths*400;
+                else if(c.getSpecialite().toString()=="CLOUD"){
+                    ciffreAff+=nbrMois*400;
                 }
-                else if(ct.getSpecialite().toString()=="SECURITE"){
-                    CA+=nbOfMonths*450;
+                else if(c.getSpecialite().toString()=="SECURITE"){
+                    ciffreAff+=nbrMois*450;
                 }
 
             }
 
         }
-        return CA;
+        return ciffreAff;
     }
+
+
+
+    /*
+    String retrieveAndUpdateStatusContrat(){
+
+        List<Contrat> listContarts = contratRepository.findAll();
+
+
+        for(int i=0;i<listContarts.size();i++) {
+            Contrat c=listContarts.get(i);
+            if(c.getArchive()==false){
+
+
+            }
+
+        }
+
+
+
+        return null;
+    }
+
+     */
 
 
 }

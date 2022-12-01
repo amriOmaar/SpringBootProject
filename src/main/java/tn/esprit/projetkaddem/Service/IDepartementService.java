@@ -35,9 +35,10 @@ public interface IDepartementService {
     public List<Departement> getDepartByNomPrenom(String nom, String prenom);
 
     public String nbrDepart();
-    public long nbrEtudByDepart();
 
-    public long nbrEtudByOneDepart(Long idDeprt);
+    public Long nbrEtudByDepart();
+
+    public long nbrEtudByOneDepart(String nomDepart);
 
 
 

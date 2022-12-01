@@ -2,6 +2,8 @@ package tn.esprit.projetkaddem.Service;
 
 
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.projetkaddem.Entities.Contrat;
 import tn.esprit.projetkaddem.Entities.Departement;
@@ -98,9 +100,17 @@ public class EtudiantService implements IEtudiantService {
 
     @Override
     public List<Etudiant> getEtudiantsByDepartement(Long idDepart) {
-
         return etudiantRepository.findByDepartementIdDepart(idDepart);
     }
+
+
+    /*
+    @Scheduled(fixedRate=60000)
+    public void fixedRate(){
+        System.out.println("Hello Schedule");
+    }
+
+     */
 
 }
 

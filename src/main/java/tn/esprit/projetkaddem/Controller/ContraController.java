@@ -13,6 +13,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 public class ContraController {
 
 
@@ -50,10 +51,10 @@ public class ContraController {
     }
 
 
-    @GetMapping("/getCiffreAffaire/{DateDebutContrat}/{DateFinContrat}")
-    public Float GetCiffreAffaire(@PathVariable("DateDebutContrat") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date dateD, @PathVariable("DateFinContrat")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)Date dateF){
+    @GetMapping("/getCiffreAffaire/{DDContrat}/{DFContrat}")
+    public Float GetCiffreAffaire(@PathVariable("DDContrat") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date DD, @PathVariable("DFContrat")@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)Date DF){
 
-        return  contratService.getChiffreAffaireEntreDeuxDate(dateD,dateF);
+        return  contratService.getChiffreAffaireEntreDeuxDate(DD,DF);
     }
 
 
