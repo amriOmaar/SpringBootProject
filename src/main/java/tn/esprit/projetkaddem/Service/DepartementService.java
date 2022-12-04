@@ -10,6 +10,7 @@ import tn.esprit.projetkaddem.Repository.UniversiteRepository;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -33,6 +34,11 @@ public class DepartementService implements IDepartementService {
 
     @Override
     public Departement saveDepartement(Departement departement) {
+        /* if (departement.getNomDepart().length() <= 3)
+            throw new RuntimeException(
+                    "Length of Nom depart must be 4 or more");
+
+         */
             return departmentRepository.save(departement);
     }
 
@@ -64,14 +70,11 @@ public class DepartementService implements IDepartementService {
         return departmentRepository.retrieveDepartementByOptionEtudiant(op);
     }
 
-
-
     @Override
     public Set<Departement> retrieveDepartementsByUniversite(Long idUniversite) {
         Universite university=universiteRepository.findById(idUniversite).orElse(null);
         return  university.getDepartements();
     }
-
 
     @Override
     public Departement addDepartementToUniversity(Departement deprt, Long idUniversite){
@@ -96,16 +99,12 @@ public class DepartementService implements IDepartementService {
     @Override
     public String nbrDepart() {
         int j=0 ;
-
         List<Departement> Listdepts = departmentRepository.findAll();
-
         for(int i=0;i<Listdepts.size();i++){
             j++;
         }
         return "On a " + j + " Departements";
     }
-
-
 
     @Override
     public Long nbrEtudByDepart() {
@@ -120,15 +119,21 @@ public class DepartementService implements IDepartementService {
         return nbrEtu;
     }
 
-
     @Override
     public long nbrEtudByOneDepart(String nomDepart) {
         long nbrEtu=0 ;
-
         Departement d = this.departmentRepository.findByNomDepart(nomDepart);
-
             return nbrEtu = d.getEtudiants().stream().map(e -> e.getDepartement()).count();
+    }
 
+    @Override
+    public Set<Option> afficherOptionForDepartement(String nomDepart){
+        Departement departement = departmentRepository.findByNomDepart(nomDepart);
+        if (departement != null){
+            return departement.getEtudiants().stream().map(Etudiant::getOption).collect(Collectors.toSet());
+        }
+
+        return null;
     }
 
 

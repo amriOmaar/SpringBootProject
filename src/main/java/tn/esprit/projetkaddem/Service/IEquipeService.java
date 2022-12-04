@@ -19,6 +19,8 @@ public interface IEquipeService {
 
     List<Equipe> findEquipeByDetailEquipeThematique(String tg);
 
+    void faireEvoluerEquipes();
+
 
 
 }

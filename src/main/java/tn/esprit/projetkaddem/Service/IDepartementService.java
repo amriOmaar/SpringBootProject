@@ -40,6 +40,8 @@ public interface IDepartementService {
 
     public long nbrEtudByOneDepart(String nomDepart);
 
+    public Set<Option> afficherOptionForDepartement(String nomDepart);
+
 
 
 }

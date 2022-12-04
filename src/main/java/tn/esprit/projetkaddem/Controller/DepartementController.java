@@ -3,15 +3,11 @@ package tn.esprit.projetkaddem.Controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.projetkaddem.Entities.Departement;
-import tn.esprit.projetkaddem.Entities.Etudiant;
-import tn.esprit.projetkaddem.Service.DepartementService;
-import tn.esprit.projetkaddem.Service.IDepartementService;
+import tn.esprit.projetkaddem.Entities.*;
+import tn.esprit.projetkaddem.Service.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
 @AllArgsConstructor
 @RestController
@@ -100,6 +96,11 @@ public class DepartementController {
     @GetMapping("/nbrEtudOneDeprt/{nomDepart}")
     public long NbrEtudOneDeprt(@PathVariable("nomDepart") String nomDepart){
         return departementService.nbrEtudByOneDepart(nomDepart);
+    }
+
+    @GetMapping("/afficherOptionForDepartement/{nomDepart}")
+    public Set<Option> afficherOptionForDepartement(@PathVariable("nomDepart") String nomDepart){
+        return departementService.afficherOptionForDepartement(nomDepart);
     }
 
 }

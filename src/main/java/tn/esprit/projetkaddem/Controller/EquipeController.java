@@ -52,4 +52,10 @@ public class EquipeController {
     }
 
 
+    @GetMapping("/faireEvoluerEquipes")
+    public void faireEvoluerEquipes(){
+        equipeService.faireEvoluerEquipes();
+    }
+
+
 }

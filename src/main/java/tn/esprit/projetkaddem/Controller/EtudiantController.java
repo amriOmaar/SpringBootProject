@@ -42,7 +42,7 @@ public class EtudiantController {
 
 
     @PostMapping("/AddEtudiant")
-    public Etudiant addEtudiant (@RequestBody Etudiant etudiant){
+    public Etudiant saveEtudiant (@RequestBody Etudiant etudiant){
         return etudiantService.saveEtudiant(etudiant);
     }
 
