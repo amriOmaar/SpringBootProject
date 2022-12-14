@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.projetkaddem.Entities.Contrat;
+import tn.esprit.projetkaddem.Entities.*;
 import tn.esprit.projetkaddem.Service.ContratService;
 
 import java.util.Date;
@@ -56,6 +56,22 @@ public class ContraController {
 
         return  contratService.getChiffreAffaireEntreDeuxDate(DD,DF);
     }
+
+
+    @GetMapping("findContratByAll/")
+    List<Contrat> findByAnyAll(
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateDebut,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFin,
+            @RequestParam(required = false) Specialite specialite,
+            @RequestParam(required = false) boolean archive
+    ){
+        return contratService.findAllByDateDebutContratOrDateFinContratOrSpecialiteOrArchive(
+                dateDebut, dateFin, specialite, archive);
+    }
+
+
+
+
 
 
 

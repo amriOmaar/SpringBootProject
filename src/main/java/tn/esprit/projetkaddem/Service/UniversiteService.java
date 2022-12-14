@@ -9,6 +9,7 @@ import tn.esprit.projetkaddem.Repository.DepartmentRepository;
 import tn.esprit.projetkaddem.Repository.UniversiteRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -31,16 +32,23 @@ public class UniversiteService implements IUniversite {
         return universiteRepository.saveAll(universites);
     }
 
-    public String deleteUniversite(Long idUniversite){
-        universiteRepository.deleteById(idUniversite);
-        return "Universite supprimé !" +idUniversite;
+
+
+    public Universite upadateUniversite(Long idUniv, Universite universite) {
+        Universite toUpdateUniversite = universiteRepository.findById(idUniv).get();
+
+        if (Objects.nonNull(universite.getNomUniv()) && !"".equalsIgnoreCase(universite.getNomUniv())) {
+            toUpdateUniversite.setNomUniv(universite.getNomUniv());
+        }
+        return universiteRepository.save(toUpdateUniversite);
+
     }
-    public Universite upadateUniversite(Universite universite){
-        Universite existingUniversite = universiteRepository.findById(universite.getId()).orElse(null);
-        existingUniversite.setNomUniv(universite.getNomUniv());
-        existingUniversite.setDepartements(universite.getDepartements());
-        return universiteRepository.save(existingUniversite);
+
+    public String deleteUniversite(Long idUniv){
+        universiteRepository.deleteById(idUniv);
+        return "Universite supprimé !" +idUniv;
     }
+
 
     @Override
     public void assignUniversiteToDepartement(Long idUniversite, Long idDepartement) {

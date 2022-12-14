@@ -15,7 +15,6 @@ public interface EtudiantRepository extends JpaRepository<Etudiant,Long>
 
     Etudiant findByPrenom(String prenon);
     Etudiant findByNom(String nom);
-
     List<Etudiant> findByDepartementId(Long idDepart);
 
 

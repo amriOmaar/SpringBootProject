@@ -5,14 +5,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import tn.esprit.projetkaddem.Entities.Contrat;
-import tn.esprit.projetkaddem.Entities.Etudiant;
+import tn.esprit.projetkaddem.Entities.*;
 import tn.esprit.projetkaddem.Repository.ContratRepository;
 import tn.esprit.projetkaddem.Repository.EtudiantRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -84,7 +85,6 @@ public class ContratService implements IContratService{
 
         for(int i=0;i<listContrats.size();i++){
             Contrat c=listContrats.get(i);
-
             if(c.getArchive()==false){
                 j++;
                 System.out.println("Les contrats dispo sont :" + j);
@@ -113,12 +113,9 @@ public class ContratService implements IContratService{
                 nbrMois=(df-dd);
 
             if(c.getArchive()==false){
-
                 System.out.println("*******"+nbrMois);
-
                 if(c.getSpecialite().toString()=="IA"){
                     ciffreAff+=nbrMois*300;
-
                 }
                 else if(c.getSpecialite().toString()=="RESEAUX"){
                     ciffreAff+=nbrMois*350;
@@ -131,7 +128,6 @@ public class ContratService implements IContratService{
                 }
 
             }
-
         }
         return ciffreAff;
     }
@@ -142,23 +138,23 @@ public class ContratService implements IContratService{
     String retrieveAndUpdateStatusContrat(){
 
         List<Contrat> listContarts = contratRepository.findAll();
-
-
         for(int i=0;i<listContarts.size();i++) {
             Contrat c=listContarts.get(i);
             if(c.getArchive()==false){
-
-
             }
-
         }
-
-
-
         return null;
     }
-
      */
+
+    @Override
+    public List<Contrat> findAllByDateDebutContratOrDateFinContratOrSpecialiteOrArchive
+            (Date dateDebut, Date dateFin, Specialite specialite, boolean archive) {
+        return contratRepository.findAllByDateDebutContratOrDateFinContratOrSpecialiteOrArchive
+                (dateDebut, dateFin, specialite, archive);
+    }
+
+
 
 
 }

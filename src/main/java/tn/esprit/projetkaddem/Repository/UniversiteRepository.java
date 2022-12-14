@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UniversiteRepository extends JpaRepository<Universite,Long>
+
 {
 
 

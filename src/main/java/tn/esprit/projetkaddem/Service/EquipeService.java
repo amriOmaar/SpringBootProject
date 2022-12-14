@@ -3,6 +3,7 @@ package tn.esprit.projetkaddem.Service;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.projetkaddem.Entities.Contrat;
 import tn.esprit.projetkaddem.Entities.Equipe;
@@ -19,7 +20,6 @@ public class EquipeService implements IEquipeService {
 
     EquipeRepository equipeRepository;
     ContratRepository contratRepository;
-
 
     @Override
     public List<Equipe> getEquipes(){
@@ -57,6 +57,7 @@ public class EquipeService implements IEquipeService {
 
 
     @Override
+    @Scheduled(cron = "0 00 08 1 * ?")
     public void faireEvoluerEquipes() {
 
         int dureEnMois=0;
@@ -72,13 +73,28 @@ public class EquipeService implements IEquipeService {
                 dureEnMois = df - dd;
             }
             Equipe equi=equipes.get(i);
-            if (dureEnMois==12 | equi.getNiveau().toString()=="JUNIOR"){
+            if (dureEnMois==12 & equi.getNiveau().toString()=="JUNIOR"){
                 equi.setNiveau(Niveau.SENIOR);
-            }else if (dureEnMois==12 | equi.getNiveau().toString()=="SENIOR"){
+            }else if (dureEnMois==12 & equi.getNiveau().toString()=="SENIOR"){
                 equi.setNiveau(Niveau.EXPERT);
             }else{
                 System.out.println("Conditions non respectés");
             }
         }
     }
+
+
+    public List<Equipe> getEquipeByNiveau(Niveau niveau){
+
+        List<Equipe> equipes = equipeRepository.findAll();
+
+        for (int i=0; i<equipes.size(); i++){
+            Equipe equ = equipes.get(i);
+            equ.getNiveau().compareTo(niveau);
+            return equipes;
+        }
+
+        return null;
+    }
+
 }

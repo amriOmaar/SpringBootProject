@@ -2,12 +2,15 @@ package tn.esprit.projetkaddem.Controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.*;
 import tn.esprit.projetkaddem.Service.*;
-
+import java.io.ByteArrayInputStream;
 import java.util.*;
-import java.util.stream.*;
 
 @AllArgsConstructor
 @RestController
@@ -15,6 +18,7 @@ import java.util.stream.*;
 public class DepartementController {
 
     IDepartementService departementService;
+    ExportPDFService exportPDFService;
 
     @GetMapping("/getDepartements")
     public List<Departement> getDepartements(){
@@ -45,21 +49,6 @@ public class DepartementController {
     public String deleteDepartement (@PathVariable Long idDepart){
         return departementService.deleteDepartement(idDepart);
     }
-
-    /*
-
-    @GetMapping("/getDeptByOption/{option}")
-    public Set<Set<Etudiant>> getEtudiantbyoption(@PathVariable("option") String option) {
-        return departementService.getDepartements().stream().
-                map(departement -> departement.getEtudiants().
-                        stream().
-                        filter(etudiant ->  Objects.equals(etudiant.getOption().toString(), option)).
-                        collect(Collectors.toSet())).
-                collect(Collectors.toSet());
-
-    }
-
-     */
 
     @GetMapping("/retrieveDepartByUniv/{idUniversite}")
     public Set<Departement> GetDepByIdUni(@PathVariable("idUniversite") Long idUniversite){
@@ -98,9 +87,35 @@ public class DepartementController {
         return departementService.nbrEtudByOneDepart(nomDepart);
     }
 
-    @GetMapping("/afficherOptionForDepartement/{nomDepart}")
-    public Set<Option> afficherOptionForDepartement(@PathVariable("nomDepart") String nomDepart){
+    @GetMapping("/nbrEtudiantOption/{nomDepart}")
+    public Map<Option, Long> afficherOptionForDepartement(@PathVariable("nomDepart") String nomDepart){
         return departementService.afficherOptionForDepartement(nomDepart);
     }
+
+    @GetMapping("exportPDF")
+    @ResponseBody
+    public ResponseEntity<InputStreamResource> exportTermsPdf() {
+        List<Departement> departements = departementService.getDepartements();
+        ByteArrayInputStream bais = exportPDFService.departementsPDFReport(departements);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("content-Disposition","inline;filename=departements.pdf");
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(new InputStreamResource(bais));
+    }
+
+    @GetMapping("triDepart")
+    public List<Departement> triDepartement(){
+        return departementService.triDepartement();
+    }
+
+    @GetMapping("/findbyNiveau/{niveau}")
+    public List<Departement>findbyNiveau(@PathVariable("niveau") Niveau niveau){
+        return departementService.findAllByEtudiantsEquipesIdeNiveau(niveau);
+    }
+
+    @GetMapping("/getDepartByNom/{nomDepart}")
+    public List<Departement>getDepartByNom(@PathVariable("nomDepart") String nomDepart){
+        return departementService.getDepartByNom(nomDepart);
+    }
+
 
 }

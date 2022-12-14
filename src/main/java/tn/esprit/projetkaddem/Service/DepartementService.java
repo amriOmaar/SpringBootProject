@@ -3,12 +3,7 @@ package tn.esprit.projetkaddem.Service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.projetkaddem.Entities.*;
-import tn.esprit.projetkaddem.Repository.DepartmentRepository;
-import tn.esprit.projetkaddem.Repository.EquipeRepository;
-import tn.esprit.projetkaddem.Repository.EtudiantRepository;
-import tn.esprit.projetkaddem.Repository.UniversiteRepository;
-
-import javax.transaction.Transactional;
+import tn.esprit.projetkaddem.Repository.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,6 +16,7 @@ public class DepartementService implements IDepartementService {
     UniversiteRepository universiteRepository;
     EtudiantRepository etudiantRepository;
     EquipeRepository equipeRepository;
+    ContratRepository contratRepository;
 
     @Override
     public List<Departement> getDepartements() {
@@ -60,14 +56,10 @@ public class DepartementService implements IDepartementService {
 
         if (Objects.nonNull(departement.getNomDepart()) && !"".equalsIgnoreCase(departement.getNomDepart())) {
                       toUpdateDepartement.setNomDepart(departement.getNomDepart());
+                      toUpdateDepartement.setChefDepart(departement.getChefDepart());
         }
         return departmentRepository.save(toUpdateDepartement);
 
-    }
-
-    @Override
-    public List<Departement> retrieveDepartementByOptionEtudiant(Option op) {
-        return departmentRepository.retrieveDepartementByOptionEtudiant(op);
     }
 
     @Override
@@ -82,17 +74,13 @@ public class DepartementService implements IDepartementService {
         Universite univ = universiteRepository.findById(idUniversite).orElse(null);
         departmentRepository.save(deprt);
         univ.getDepartements().add(deprt);
-
         universiteRepository.save(univ);
-
         return deprt;
     }
 
     @Override
     public List<Departement> getDepartByNomPrenom(String nom, String prenom) {
-
         return departmentRepository.getDepartementByNomAndPrenomEtudiant(nom, prenom);
-
     }
 
 
@@ -109,12 +97,9 @@ public class DepartementService implements IDepartementService {
     @Override
     public Long nbrEtudByDepart() {
         long nbrEtu=0 ;
-
         List<Departement> Listdepts = departmentRepository.findAll();
-
         for(int i=0;i<Listdepts.size();i++){
             return nbrEtu = Listdepts.get(i).getEtudiants().stream().map(e -> e.getDepartement()).count();
-
         }
         return nbrEtu;
     }
@@ -127,13 +112,37 @@ public class DepartementService implements IDepartementService {
     }
 
     @Override
-    public Set<Option> afficherOptionForDepartement(String nomDepart){
-        Departement departement = departmentRepository.findByNomDepart(nomDepart);
-        if (departement != null){
-            return departement.getEtudiants().stream().map(Etudiant::getOption).collect(Collectors.toSet());
+    public Map<Option, Long> afficherOptionForDepartement(String nomDepart){
+        Departement departement=departmentRepository.findByNomDepart(nomDepart);
+        if(departement!=null){
+            return   departement.getEtudiants().stream().collect(Collectors.groupingBy(Etudiant::getOption,Collectors.counting()));
         }
-
         return null;
+    }
+
+    @Override
+    public List<Departement> triDepartement(){
+        return departmentRepository.triDepartement();
+    }
+
+    @Override
+    public List<Departement> findAllByEtudiantsEquipesIdeNiveau(Niveau niveau) {
+        return departmentRepository.findAllByEtudiantsEquipesNiveau(niveau);
+    }
+
+
+    @Override
+    public List<Departement> getDepartByNom(String nomDepart) {
+        List<Departement> departements=departmentRepository.findAll();
+        List<Departement> newList= new ArrayList<>() ;
+
+        for (int i=0; i<departements.size(); i++){
+            Departement d = departements.get(i);
+            if(d.getNomDepart().contains(nomDepart)){
+                newList.add(d);
+            }
+        }
+            return newList;
     }
 
 

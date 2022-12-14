@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.projetkaddem.Entities.Equipe;
+import tn.esprit.projetkaddem.Entities.Niveau;
 import tn.esprit.projetkaddem.Service.EquipeService;
 
 import java.util.List;
@@ -45,7 +46,6 @@ public class EquipeController {
         return equipeService.deleteEquipe(idEquipe);
     }
 
-
     @GetMapping("/findequipeDetailequipe/{tg}")
     public List<Equipe> findEquipeByDetailEquipeThematiqueLike(@PathVariable("tg") String thematique){
         return equipeService.findEquipeByDetailEquipeThematique(thematique);
@@ -55,6 +55,13 @@ public class EquipeController {
     @GetMapping("/faireEvoluerEquipes")
     public void faireEvoluerEquipes(){
         equipeService.faireEvoluerEquipes();
+    }
+
+    @GetMapping("/getByNiveau/{niveau}")
+    public List<Equipe> findByNiveau(@PathVariable("niveau") Niveau niveau){
+
+        return equipeService.getEquipeByNiveau(niveau);
+
     }
 
 

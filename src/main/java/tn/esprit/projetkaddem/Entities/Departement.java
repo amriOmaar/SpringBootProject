@@ -21,9 +21,11 @@ import java.util.Set;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomDepart;
+    private String chefDepart;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "departement")
     private Set<Etudiant> etudiants;
+
 
 
 }
